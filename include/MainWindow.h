@@ -30,6 +30,7 @@
 #include <QList>
 #include <QMainWindow>
 #include <QMdiArea>
+#include <QSplitter>
 
 #include "ConfigManager.h"
 
@@ -44,6 +45,8 @@ namespace gui
 {
 
 class PluginView;
+class SideBar;
+class SideBarWidget;
 class SubWindow;
 class ToolButton;
 
@@ -145,6 +148,10 @@ public:
 
 	bool eventFilter(QObject* watched, QEvent* event) override;
 
+	// Add a SideBarWidget tab to the left sidebar and the splitter.
+	// Call after GuiApplication() is created (i.e. from main.cpp).
+	void addSideBarTab(SideBarWidget* tab);
+
 signals:
 	void detachAllSubWindows(bool detached);
 
@@ -223,6 +230,9 @@ private:
 
 	QWidget * m_toolBar;
 	QGridLayout * m_toolBarLayout;
+
+	SideBar    * m_sideBar{nullptr};
+	QSplitter  * m_sideBarSplitter{nullptr};
 
 	struct keyModifiers
 	{

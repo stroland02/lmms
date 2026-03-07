@@ -64,6 +64,7 @@
 #include "RemotePluginBase.h"
 #include "SetupDialog.h"
 #include "SideBar.h"
+#include "SideBarWidget.h"
 #include "SongEditor.h"
 #include "SubWindow.h"
 #include "TemplatesMenu.h"
@@ -99,38 +100,38 @@ MainWindow::MainWindow() :
 	hbox->setSpacing( 0 );
 	hbox->setContentsMargins(0, 0, 0, 0);
 
-	auto sideBar = new SideBar(Qt::Vertical, w);
+	m_sideBar = new SideBar(Qt::Vertical, w);
 
-	auto splitter = new QSplitter(Qt::Horizontal, w);
-	splitter->setChildrenCollapsible( false );
+	m_sideBarSplitter = new QSplitter(Qt::Horizontal, w);
+	m_sideBarSplitter->setChildrenCollapsible( false );
 
 	ConfigManager* confMgr = ConfigManager::inst();
 	bool sideBarOnRight = confMgr->value("ui", "sidebaronright").toInt();
 
 	emit initProgress(tr("Preparing plugin browser"));
-	sideBar->appendTab( new PluginBrowser( splitter ) );
+	m_sideBar->appendTab( new PluginBrowser( m_sideBarSplitter ) );
 	emit initProgress(tr("Preparing file browsers"));
 
-	sideBar->appendTab(new FileBrowser(FileBrowser::Type::Favorites, ConfigManager::inst()->favoriteItems().join("*"), FileItem::defaultFilters(), "My Favorites",
-		embed::getIconPixmap("star").transformed(QTransform().rotate(90)), splitter, false, "", ""));
+	m_sideBar->appendTab(new FileBrowser(FileBrowser::Type::Favorites, ConfigManager::inst()->favoriteItems().join("*"), FileItem::defaultFilters(), "My Favorites",
+		embed::getIconPixmap("star").transformed(QTransform().rotate(90)), m_sideBarSplitter, false, "", ""));
 
-	sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal,
+	m_sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal,
 		confMgr->userProjectsDir() + "*" + confMgr->factoryProjectsDir(), "*.mmp *.mmpz *.xml *.mid *.mpt",
-		tr("My Projects"), embed::getIconPixmap("project_file").transformed(QTransform().rotate(90)), splitter, false,
+		tr("My Projects"), embed::getIconPixmap("project_file").transformed(QTransform().rotate(90)), m_sideBarSplitter, false,
 		confMgr->userProjectsDir(), confMgr->factoryProjectsDir()));
 
-	sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal,
+	m_sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal,
 		confMgr->userSamplesDir() + "*" + confMgr->factorySamplesDir(), FileItem::defaultFilters(), tr("My Samples"),
-		embed::getIconPixmap("sample_file").transformed(QTransform().rotate(90)), splitter, false,
+		embed::getIconPixmap("sample_file").transformed(QTransform().rotate(90)), m_sideBarSplitter, false,
 		confMgr->userSamplesDir(), confMgr->factorySamplesDir()));
 
-	sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal,
+	m_sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal,
 		confMgr->userPresetsDir() + "*" + confMgr->factoryPresetsDir(), "*.xpf *.cs.xml *.xiz *.lv2", tr("My Presets"),
-		embed::getIconPixmap("preset_file").transformed(QTransform().rotate(90)), splitter, false,
+		embed::getIconPixmap("preset_file").transformed(QTransform().rotate(90)), m_sideBarSplitter, false,
 		confMgr->userPresetsDir(), confMgr->factoryPresetsDir()));
 
-	sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal, QDir::homePath(), FileItem::defaultFilters(),
-		tr("My Home"), embed::getIconPixmap("home").transformed(QTransform().rotate(90)), splitter, false));
+	m_sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal, QDir::homePath(), FileItem::defaultFilters(),
+		tr("My Home"), embed::getIconPixmap("home").transformed(QTransform().rotate(90)), m_sideBarSplitter, false));
 
 	QStringList root_paths;
 	QString title = tr("Root Directory");
@@ -152,10 +153,10 @@ MainWindow::MainWindow() :
 	}
 #endif
 
-	sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal, root_paths.join("*"), FileItem::defaultFilters(), title,
-		embed::getIconPixmap("computer").transformed(QTransform().rotate(90)), splitter, dirs_as_items));
+	m_sideBar->appendTab(new FileBrowser(FileBrowser::Type::Normal, root_paths.join("*"), FileItem::defaultFilters(), title,
+		embed::getIconPixmap("computer").transformed(QTransform().rotate(90)), m_sideBarSplitter, dirs_as_items));
 
-	m_workspace = new MovableQMdiArea(splitter);
+	m_workspace = new MovableQMdiArea(m_sideBarSplitter);
 
 	// Load background
 	emit initProgress(tr("Loading background picture"));
@@ -178,14 +179,14 @@ MainWindow::MainWindow() :
 	m_workspace->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	m_workspace->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-	hbox->addWidget(sideBar);
-	hbox->addWidget(splitter);
+	hbox->addWidget(m_sideBar);
+	hbox->addWidget(m_sideBarSplitter);
 	// If the user wants the sidebar on the right, we move the workspace and
 	// the splitter to the "left" side, or the first widgets in their list
 	if (sideBarOnRight)
 	{
-		splitter->insertWidget(0, m_workspace);
-		hbox->insertWidget(0, splitter);
+		m_sideBarSplitter->insertWidget(0, m_workspace);
+		hbox->insertWidget(0, m_sideBarSplitter);
 	}
 
 	// create global-toolbar at the top of our window
@@ -1693,5 +1694,16 @@ void MainWindow::MovableQMdiArea::mouseReleaseEvent(QMouseEvent* event)
 	setCursor(Qt::ArrowCursor);
 	m_isBeingMoved = false;
 }
+
+
+void MainWindow::addSideBarTab(SideBarWidget* tab)
+{
+	// Add to the splitter so the panel appears in the content area.
+	// QSplitter::addWidget reparents the widget and manages its layout.
+	m_sideBarSplitter->addWidget(tab);
+	// Register the tab with the sidebar (creates toggle button, hides the widget).
+	m_sideBar->appendTab(tab);
+}
+
 
 } // namespace lmms::gui
