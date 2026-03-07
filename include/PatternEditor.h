@@ -91,6 +91,9 @@ public:
 
 	PatternEditor* m_editor;
 
+signals:
+	void aiNotesRequested(const QString& prompt, int tempo, int bars);
+
 public slots:
 	void play() override;
 	void stop() override;

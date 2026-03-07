@@ -29,6 +29,7 @@
 #include <QtMath>  // IWYU pragma: keep
 #include <QApplication>
 #include <QCheckBox>
+#include <QFile>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QInputDialog>
@@ -5854,6 +5855,117 @@ void PianoRollWindow::updateStepRecordingIcon()
 	{
 		m_toggleStepRecordingAction->setIcon(embed::getIconPixmap("record_step_off"));
 	}
+}
+
+
+void PianoRollWindow::importNotesFromMidi(const QString& midiFilePath)
+{
+	if (!m_editor || !m_editor->m_midiClip) { return; }
+
+	QFile f(midiFilePath);
+	if (!f.open(QIODevice::ReadOnly)) { return; }
+	QByteArray data = f.readAll();
+	f.close();
+
+	if (data.size() < 14) { return; }
+
+	// Minimal Standard MIDI File parser (format 0/1, single track scan)
+	auto u16 = [&](int off) -> uint16_t {
+		return (uint8_t(data[off]) << 8) | uint8_t(data[off+1]);
+	};
+	auto u32 = [&](int off) -> uint32_t {
+		return (uint8_t(data[off]) << 24) | (uint8_t(data[off+1]) << 16)
+		     | (uint8_t(data[off+2]) << 8) | uint8_t(data[off+3]);
+	};
+
+	if (data.mid(0,4) != "MThd" || u32(4) != 6) { return; }
+	uint16_t ppq = u16(12);
+	if (ppq == 0) { ppq = 480; }
+
+	// Find first MTrk
+	int pos = 14;
+	while (pos + 8 <= data.size()) {
+		if (data.mid(pos, 4) == "MTrk") { break; }
+		pos += 8 + u32(pos + 4);
+	}
+	if (pos + 8 > data.size()) { return; }
+	int trkEnd = pos + 8 + u32(pos + 4);
+	pos += 8;
+
+	auto readVLQ = [&](int& p) -> uint32_t {
+		uint32_t val = 0;
+		for (int i = 0; i < 4 && p < trkEnd; ++i) {
+			uint8_t b = uint8_t(data[p++]);
+			val = (val << 7) | (b & 0x7F);
+			if (!(b & 0x80)) break;
+		}
+		return val;
+	};
+
+	struct MidiNote { uint32_t startTick; uint32_t endTick; int key; int vel; };
+	std::vector<MidiNote> pendingNotes;
+	std::vector<MidiNote> finishedNotes;
+
+	uint32_t absTick = 0;
+	uint8_t runningStatus = 0;
+
+	while (pos < trkEnd) {
+		uint32_t delta = readVLQ(pos);
+		absTick += delta;
+		if (pos >= trkEnd) break;
+
+		uint8_t status = uint8_t(data[pos]);
+		if (status & 0x80) { runningStatus = status; pos++; }
+		else { status = runningStatus; }
+
+		uint8_t type = status & 0xF0;
+		if (type == 0x90 && pos + 1 < trkEnd) {
+			int key = uint8_t(data[pos++]);
+			int vel = uint8_t(data[pos++]);
+			if (vel > 0) {
+				pendingNotes.push_back({absTick, 0, key, vel});
+			} else {
+				for (auto it = pendingNotes.rbegin(); it != pendingNotes.rend(); ++it) {
+					if (it->key == key) { it->endTick = absTick; finishedNotes.push_back(*it); pendingNotes.erase((it+1).base()); break; }
+				}
+			}
+		} else if (type == 0x80 && pos + 1 < trkEnd) {
+			int key = uint8_t(data[pos++]); pos++;
+			for (auto it = pendingNotes.rbegin(); it != pendingNotes.rend(); ++it) {
+				if (it->key == key) { it->endTick = absTick; finishedNotes.push_back(*it); pendingNotes.erase((it+1).base()); break; }
+			}
+		} else if (type == 0xC0 || type == 0xD0) {
+			pos++;
+		} else if (type == 0xFF) {
+			if (pos < trkEnd) { pos++; } // meta type
+			uint32_t len = readVLQ(pos);
+			pos += len;
+		} else if (type == 0xF0 || type == 0xF7) {
+			uint32_t len = readVLQ(pos);
+			pos += len;
+		} else {
+			pos += 2; // default 2-byte messages
+		}
+	}
+	// close any still-open notes
+	for (auto& n : pendingNotes) { n.endTick = absTick; finishedNotes.push_back(n); }
+
+	if (finishedNotes.empty()) { return; }
+
+	// Convert MIDI ticks to LMMS ticks (LMMS uses 192 ppq)
+	const double scale = 192.0 / ppq;
+	auto* clip = m_editor->m_midiClip;
+
+	for (auto& mn : finishedNotes) {
+		int startT = int(mn.startTick * scale + 0.5);
+		int lenT   = int((mn.endTick - mn.startTick) * scale + 0.5);
+		if (lenT < 1) { lenT = 1; }
+		Note n(TimePos(lenT), TimePos(startT), mn.key, mn.vel * 100 / 127);
+		clip->addNote(n, false);
+	}
+	clip->rearrangeAllNotes();
+	clip->updateLength();
+	m_editor->update();
 }
 
 

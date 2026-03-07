@@ -591,7 +591,10 @@ public:
 
 signals:
 	void currentMidiClipChanged();
+	void aiNotesRequested(const QString& prompt, int tempo, int bars);
 
+public slots:
+	void importNotesFromMidi(const QString& midiFilePath);
 
 private slots:
 	void updateAfterMidiClipChange();
