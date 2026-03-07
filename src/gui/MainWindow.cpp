@@ -1698,11 +1698,14 @@ void MainWindow::MovableQMdiArea::mouseReleaseEvent(QMouseEvent* event)
 
 void MainWindow::addSideBarTab(SideBarWidget* tab)
 {
-	// Add to the splitter so the panel appears in the content area.
-	// QSplitter::addWidget reparents the widget and manages its layout.
-	m_sideBarSplitter->addWidget(tab);
-	// Register the tab with the sidebar (creates toggle button, hides the widget).
+	// Insert BEFORE the MDI workspace (always the last splitter child) so the
+	// panel opens to the LEFT of the workspace, not to the right.
+	const int beforeWorkspace = m_sideBarSplitter->count() - 1;
+	m_sideBarSplitter->insertWidget(beforeWorkspace > 0 ? beforeWorkspace : 0, tab);
+	// Register with sidebar (creates toggle button, calls tab->hide(), sets minWidth 200).
 	m_sideBar->appendTab(tab);
+	// AI pages have more controls than a file list; give them a wider minimum.
+	tab->setMinimumWidth(380);
 }
 
 
