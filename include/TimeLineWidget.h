@@ -68,6 +68,7 @@ public:
 	Q_PROPERTY(int loopHandleWidth MEMBER m_loopHandleWidth)
 	Q_PROPERTY(QSize mouseHotspotSelLeft READ mouseHotspotSelLeft WRITE setMouseHotspotSelLeft)
 	Q_PROPERTY(QSize mouseHotspotSelRight READ mouseHotspotSelRight WRITE setMouseHotspotSelRight)
+	Q_PROPERTY(QColor bgColor READ getBgColor WRITE setBgColor)
 
 	static constexpr const char* AutoScrollDisabledString = "disabled";
 	static constexpr const char* AutoScrollSteppedString = "stepped";
@@ -215,6 +216,10 @@ private:
 
 	QColor m_barLineColor = QColor{192, 192, 192};
 	QColor m_barNumberColor = m_barLineColor.darker(120);
+	QColor m_bgColor = QColor{30, 32, 35};
+
+	inline QColor const & getBgColor() const { return m_bgColor; }
+	inline void setBgColor(QColor const & c) { m_bgColor = c; }
 
 	QCursor m_cursorSelectLeft = QCursor{embed::getIconPixmap("cursor_select_left"), 0, 16};
 	QCursor m_cursorSelectRight = QCursor{embed::getIconPixmap("cursor_select_right"), 32, 16};

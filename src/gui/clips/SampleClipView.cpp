@@ -236,7 +236,7 @@ void SampleClipView::paintEvent( QPaintEvent * pe )
 	bool selected = isSelected();
 
 	QLinearGradient lingrad(0, 0, 0, height());
-	QColor c = painter.background().color();
+	QColor c = clipBgColor();
 	if (muted) { c = c.darker(150); }
 	if (selected) { c = c.darker(150); }
 

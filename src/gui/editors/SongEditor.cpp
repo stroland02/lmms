@@ -980,6 +980,7 @@ SongEditorWindow::SongEditorWindow(Song* song) :
 	connect(m_removeBarAction, SIGNAL(triggered()), song, SLOT(removeBar()));
 
 	DropToolBar *zoomToolBar = addDropToolBarToTop(tr("Zoom controls"));
+	zoomToolBar->setObjectName("WavyControlBar");
 
 	auto zoom_lbl = new QLabel(m_toolBar);
 	zoom_lbl->setPixmap( embed::getIconPixmap( "zoom" ) );
@@ -999,6 +1000,7 @@ SongEditorWindow::SongEditorWindow(Song* song) :
 	zoomToolBar->addWidget(m_zoomingSlider);
 
 	DropToolBar *snapToolBar = addDropToolBarToTop(tr("Snap controls"));
+	snapToolBar->setObjectName("WavyControlBar");
 	auto snap_lbl = new QLabel(m_toolBar);
 	snap_lbl->setPixmap( embed::getIconPixmap( "quantize" ) );
 

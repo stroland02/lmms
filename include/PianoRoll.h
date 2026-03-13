@@ -157,6 +157,13 @@ public:
 
 	int quantization() const;
 
+	// ── Wavy: public model accessors for external toolbar binding ────
+	ComboBoxModel& quantizeModel()  { return m_quantizeModel; }
+	ComboBoxModel& noteLenModel()   { return m_noteLenModel; }
+	ComboBoxModel& keyModel()       { return m_keyModel; }
+	ComboBoxModel& scaleModel()     { return m_scaleModel; }
+	ComboBoxModel& chordModel()     { return m_chordModel; }
+
 protected:
 	enum class QuantizeAction
 	{
@@ -575,6 +582,9 @@ public:
 
 	/*! \brief Resets settings to default when e.g. creating a new project */
 	void reset();
+
+	// Wavy: access inner PianoRoll editor for toolbar binding
+	PianoRoll* editor() { return m_editor; }
 
 	using SerializingObject::saveState;
 	using SerializingObject::restoreState;

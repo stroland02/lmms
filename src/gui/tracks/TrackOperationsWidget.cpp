@@ -31,6 +31,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPushButton>
+#include <QStyleOption>
 
 #include "AutomatableButton.h"
 #include "AutomationClip.h"
@@ -158,9 +159,10 @@ void TrackOperationsWidget::mousePressEvent( QMouseEvent * me )
  */
 void TrackOperationsWidget::paintEvent(QPaintEvent*)
 {
+	QStyleOption opt;
+	opt.initFrom( this );
 	QPainter p( this );
-
-	p.fillRect(rect(), palette().brush(QPalette::Window));
+	style()->drawPrimitive( QStyle::PE_Widget, &opt, &p, this );
 }
 
 

@@ -67,6 +67,7 @@ public:
 
 	int addWidgetToToolBar( QWidget * _w, int _row = -1, int _col = -1 );
 	void addSpacingToToolBar( int _size );
+	void addStretchToToolBar();
 
 	// wrap the widget with a window decoration and add it to the workspace
 	LMMS_EXPORT SubWindow* addWindowedWidget(QWidget *w, Qt::WindowFlags windowFlags = QFlag(0));

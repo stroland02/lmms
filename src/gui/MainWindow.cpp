@@ -29,9 +29,11 @@
 #include <QDesktopServices>
 #include <QDomElement>
 #include <QFileInfo>
+#include <QImage>
 #include <QMdiArea>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QPainter>
 #include <QShortcut>
 #include <QSplitter>
 
@@ -263,7 +265,72 @@ MainWindow::~MainWindow()
 void MainWindow::finalize()
 {
 	resetWindowTitle();
-	setWindowIcon( embed::getIconPixmap( "icon_small" ) );
+	// Use provided icon image for taskbar; crop to logo and scale so it fills the icon (fix zoomed-out look)
+	QPixmap iconPixmap = embed::getIconPixmap( "icon_small" );
+	if ( !iconPixmap.isNull() )
+	{
+		QImage img = iconPixmap.toImage();
+		if ( img.format() != QImage::Format_ARGB32 && img.format() != QImage::Format_RGB32 )
+			img = img.convertToFormat( QImage::Format_ARGB32 );
+		const int w = img.width(), h = img.height();
+		if ( w > 0 && h > 0 )
+		{
+			// Detect background from corner pixel (white or black)
+			QRgb corner = img.pixel( 0, 0 );
+			int cr = qRed( corner ), cg = qGreen( corner ), cb = qBlue( corner );
+			const int thresh = 40;
+			int minX = w, minY = h, maxX = -1, maxY = -1;
+			for ( int y = 0; y < h; ++y )
+				for ( int x = 0; x < w; ++x )
+				{
+					QRgb p = img.pixel( x, y );
+					if ( qAlpha( p ) < 128 ) continue;
+					int r = qRed( p ), g = qGreen( p ), b = qBlue( p );
+					bool isBg = ( qAbs( r - cr ) <= thresh && qAbs( g - cg ) <= thresh && qAbs( b - cb ) <= thresh );
+					if ( !isBg )
+					{
+						if ( x < minX ) minX = x;
+						if ( x > maxX ) maxX = x;
+						if ( y < minY ) minY = y;
+						if ( y > maxY ) maxY = y;
+					}
+				}
+			if ( minX <= maxX && minY <= maxY )
+			{
+				const int pad = 2;
+				int cx = std::max( 0, minX - pad );
+				int cy = std::max( 0, minY - pad );
+				int cw = std::min( w - cx, maxX - minX + 1 + 2 * pad );
+				int ch = std::min( h - cy, maxY - minY + 1 + 2 * pad );
+				QImage cropped = img.copy( cx, cy, cw, ch );
+				// Scale so logo fills icon (256 for HiDPI taskbar)
+				const int iconSize = 256;
+				QPixmap out( iconSize, iconSize );
+				out.fill( corner );
+				QPainter painter( &out );
+				QPixmap cropPix = QPixmap::fromImage( cropped );
+				QPixmap scaled = cropPix.scaled( iconSize, iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+				int sx = ( iconSize - scaled.width() ) / 2;
+				int sy = ( iconSize - scaled.height() ) / 2;
+				painter.drawPixmap( sx, sy, scaled );
+				painter.end();
+				// Tint logo to white (user requested "white one")
+				QImage outImg = out.toImage();
+				for ( int iy = 0; iy < outImg.height(); ++iy )
+					for ( int ix = 0; ix < outImg.width(); ++ix )
+					{
+						QRgb p = outImg.pixel( ix, iy );
+						if ( qAlpha( p ) < 128 ) continue;
+						int r = qRed( p ), g = qGreen( p ), b = qBlue( p );
+						bool isBg = ( qAbs( r - cr ) <= thresh && qAbs( g - cg ) <= thresh && qAbs( b - cb ) <= thresh );
+						if ( !isBg )
+							outImg.setPixel( ix, iy, qRgba( 255, 255, 255, qAlpha( p ) ) );
+					}
+				iconPixmap = QPixmap::fromImage( outImg );
+			}
+		}
+	}
+	setWindowIcon( iconPixmap );
 
 	auto addAction = [this](QMenu* menu, std::string_view icon, const QString& text,
 		const QKeySequence& shortcut, auto(MainWindow::* slot)()) -> QAction*
@@ -530,6 +597,16 @@ void MainWindow::addSpacingToToolBar( int _size )
 {
 	m_toolBarLayout->setColumnMinimumWidth( m_toolBarLayout->columnCount() +
 								7, _size );
+}
+
+
+void MainWindow::addStretchToToolBar()
+{
+	int col = m_toolBarLayout->columnCount() + 7;
+	auto* placeholder = new QWidget( m_toolBar );
+	placeholder->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Preferred );
+	m_toolBarLayout->addWidget( placeholder, 0, col, 2, 1 );
+	m_toolBarLayout->setColumnStretch( col, 1 );
 }
 
 

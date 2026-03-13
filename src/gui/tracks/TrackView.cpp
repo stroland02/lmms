@@ -69,11 +69,8 @@ TrackView::TrackView( Track * track, TrackContainerView * tcv ) :
 	m_action( Action::None )                /*!< The action we're currently performing */
 {
 	setAutoFillBackground( true );
-	QPalette pal;
-	pal.setColor( backgroundRole(), QColor( 32, 36, 40 ) );
-	setPalette( pal );
-
-	m_trackSettingsWidget.setAutoFillBackground( true );
+	m_trackSettingsWidget.setObjectName( "TrackSettings" );
+	m_trackSettingsWidget.setAttribute( Qt::WA_StyledBackground, true );
 
 	auto layout = new QHBoxLayout(this);
 	layout->setContentsMargins(0, 0, 0, 0);

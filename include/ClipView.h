@@ -62,6 +62,7 @@ class ClipView : public selectableObject, public ModelView
 	Q_PROPERTY( QColor patternClipBackground READ patternClipBackground WRITE setPatternClipBackground )
 	Q_PROPERTY( bool gradient READ gradient WRITE setGradient )
 	Q_PROPERTY(QColor markerColor READ markerColor WRITE setMarkerColor)
+	Q_PROPERTY(QColor clipBgColor READ clipBgColor WRITE setClipBgColor)
 
 public:
 	const static int BORDER_WIDTH = 2;
@@ -91,6 +92,7 @@ public:
 	QColor patternClipBackground() const;
 	QColor markerColor() const;
 	bool gradient() const;
+	QColor clipBgColor() const { return m_clipBgColor; }
 	void setMutedColor( const QColor & c );
 	void setMutedBackgroundColor( const QColor & c );
 	void setSelectedColor( const QColor & c );
@@ -100,6 +102,7 @@ public:
 	void setPatternClipBackground(const QColor& c);
 	void setGradient( const bool & b );
 	void setMarkerColor(const QColor& c);
+	void setClipBgColor(const QColor& c) { m_clipBgColor = c; }
 
 	// access needsUpdate member variable
 	bool needsUpdate();
@@ -219,6 +222,7 @@ private:
 	QColor m_patternClipBackground;
 	bool m_gradient;
 	QColor m_markerColor;
+	QColor m_clipBgColor;
 
 	bool m_needsUpdate;
 	inline void setInitialPos( QPoint pos )

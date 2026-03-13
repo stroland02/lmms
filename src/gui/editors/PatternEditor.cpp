@@ -302,6 +302,7 @@ PatternEditorWindow::PatternEditorWindow(PatternStore* ps) :
 
 	// Pattern selector
 	DropToolBar* patternSelectionToolBar = addDropToolBarToTop(tr("Pattern selector"));
+	patternSelectionToolBar->setObjectName("WavyControlBar");
 
 	m_patternComboBox = new ComboBox(m_toolBar);
 	m_patternComboBox->setFixedSize(200, ComboBox::DEFAULT_HEIGHT);
@@ -312,6 +313,7 @@ PatternEditorWindow::PatternEditorWindow(PatternStore* ps) :
 
 	// Track actions
 	DropToolBar *trackAndStepActionsToolBar = addDropToolBarToTop(tr("Track and step actions"));
+	trackAndStepActionsToolBar->setObjectName("WavyControlBar");
 
 
 	trackAndStepActionsToolBar->addAction(embed::getIconPixmap("add_pattern_track"), tr("New pattern"),

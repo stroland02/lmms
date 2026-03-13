@@ -108,7 +108,7 @@ void PatternClipView::paintEvent(QPaintEvent*)
 	QPainter p( &m_paintPixmap );
 
 	QLinearGradient lingrad( 0, 0, 0, height() );
-	QColor c = getColorForDisplay( painter.background().color() );
+	QColor c = getColorForDisplay( clipBgColor() );
 	
 	lingrad.setColorAt( 0, c.lighter( 130 ) );
 	lingrad.setColorAt( 1, c.lighter( 70 ) );

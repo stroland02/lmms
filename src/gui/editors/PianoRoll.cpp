@@ -5301,6 +5301,7 @@ PianoRollWindow::PianoRollWindow() :
 
 
 	DropToolBar *zoomAndNotesToolBar = addDropToolBarToTop( tr( "Zoom and note controls" ) );
+	zoomAndNotesToolBar->setObjectName("WavyControlBar");
 
 	auto zoom_lbl = new QLabel(m_toolBar);
 	zoom_lbl->setPixmap( embed::getIconPixmap( "zoom_x" ) );

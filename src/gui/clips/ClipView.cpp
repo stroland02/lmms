@@ -98,6 +98,7 @@ ClipView::ClipView( Clip * clip,
 	m_patternClipBackground( 0, 0, 0 ),
 	m_gradient( true ),
 	m_markerColor(0, 0, 0),
+	m_clipBgColor(42, 31, 92),
 	m_needsUpdate( true )
 {
 	if( s_textFloat == nullptr )

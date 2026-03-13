@@ -46,7 +46,10 @@
 #include <QtGlobal>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLinearGradient>
 #include <QMessageBox>
+#include <QPainter>
+#include <QPixmap>
 #include <QSplashScreen>
 #include <QSocketNotifier>
 
@@ -116,30 +119,89 @@ GuiApplication::GuiApplication()
 	QApplication::setPalette( *lpal );
 	LmmsStyle::s_palette = lpal;
 
-#ifdef LMMS_BUILD_APPLE
+	// Only show window icon in title bar, not in menu bar
 	QApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
-#endif
 
-	// Show splash screen
-	QSplashScreen splashScreen( embed::getIconPixmap( "splash" ) );
-	splashScreen.setFixedSize(splashScreen.pixmap().size());
+	// Show splash screen — polished loading screen with gradient, logo, and status bar
+	QPixmap splashBase = embed::getIconPixmap( "splash" );
+	const int splashW = 560;
+	const int splashH = 320;
+	const int statusBarHeight = 52;
+	const int progressBarHeight = 3;
+	const int contentH = splashH - statusBarHeight;
+
+	// Colors: dark gradient background, status bar, accent
+	const QColor bgTop( 0x2a, 0x2a, 0x2e );
+	const QColor bgBottom( 0x1a, 0x1a, 0x1e );
+	const QColor statusBarColor( 0x18, 0x18, 0x1b );
+	const QColor statusBarBorderColor( 0x35, 0x35, 0x38 );
+	const QColor accentColor( 0xc0, 0x50, 0x40 );  // subtle red accent
+	const QColor progressTrackColor( 0x30, 0x30, 0x34 );
+	const QColor progressFillColor( 0x60, 0x58, 0x58 );
+
+	QPixmap splashPixmap( splashW, splashH );
+	QPainter p( &splashPixmap );
+	if ( p.isActive() )
+	{
+		// Gradient background
+		QLinearGradient grad( 0, 0, 0, splashH );
+		grad.setColorAt( 0.0, bgTop );
+		grad.setColorAt( 1.0, bgBottom );
+		p.fillRect( 0, 0, splashW, splashH, grad );
+
+		// Content area: centered logo
+		if ( !splashBase.isNull() )
+		{
+			const int margin = 40;
+			QRect logoRect( margin, margin, splashW - 2 * margin, contentH - 2 * margin );
+			QPixmap scaled = splashBase.scaled( logoRect.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation );
+			int x = ( splashW - scaled.width() ) / 2;
+			int y = margin + ( contentH - 2 * margin - scaled.height() ) / 2;
+			p.drawPixmap( x, y, scaled );
+		}
+
+		// Status bar: solid bar with thin accent line and progress strip
+		p.fillRect( 0, contentH, splashW, statusBarHeight, statusBarColor );
+		p.setPen( statusBarBorderColor );
+		p.drawLine( 0, contentH, splashW, contentH );
+		// Accent line at top of status bar
+		p.setPen( QPen( accentColor, 2 ) );
+		p.drawLine( 0, contentH + 1, splashW, contentH + 1 );
+		// Progress bar track at bottom of status bar
+		const int trackY = splashH - progressBarHeight - 6;
+		p.fillRect( 12, trackY, splashW - 24, progressBarHeight, progressTrackColor );
+		p.fillRect( 12, trackY, static_cast<int>( ( splashW - 24 ) * 0.28 ), progressBarHeight, progressFillColor );
+		p.end();
+	}
+
+	QSplashScreen splashScreen( splashPixmap );
+	splashScreen.setFixedSize( splashW, splashH );
 	splashScreen.show();
 
 	QHBoxLayout layout;
-	layout.setAlignment(Qt::AlignBottom);
-	splashScreen.setLayout(&layout);
+	layout.setAlignment( Qt::AlignBottom );
+	layout.setContentsMargins( 24, 0, 24, 14 );
+	layout.setSpacing( 20 );
+	splashScreen.setLayout( &layout );
 
-	// Create a left-aligned label for loading progress 
-	// & a right-aligned label for version info
 	QLabel loadingProgressLabel;
 	m_loadingProgressLabel = &loadingProgressLabel;
-	QLabel versionLabel(MainWindow::tr( "Version %1" ).arg( LMMS_VERSION ));
+	QLabel versionLabel( MainWindow::tr( "Version %1" ).arg( LMMS_VERSION ) );
 
-	loadingProgressLabel.setAlignment(Qt::AlignLeft);
-	versionLabel.setAlignment(Qt::AlignRight);
+	loadingProgressLabel.setAlignment( Qt::AlignLeft | Qt::AlignVCenter );
+	loadingProgressLabel.setStyleSheet(
+		"color: #eaeaea; font-size: 13px; font-weight: 500; letter-spacing: 0.03em;" );
+	loadingProgressLabel.setMinimumHeight( statusBarHeight - 20 );
+	versionLabel.setAlignment( Qt::AlignRight | Qt::AlignVCenter );
+	versionLabel.setStyleSheet(
+		"color: #8a8a8e; font-size: 11px; font-weight: 450; letter-spacing: 0.02em;" );
+	versionLabel.setMinimumHeight( statusBarHeight - 20 );
 
-	layout.addWidget(&loadingProgressLabel);
-	layout.addWidget(&versionLabel);
+	layout.addWidget( &loadingProgressLabel, 1 );
+	layout.addWidget( &versionLabel );
+
+	layout.addWidget( &loadingProgressLabel, 1 );
+	layout.addWidget( &versionLabel );
 
 	// may have long gaps between future frames, so force update now
 	splashScreen.update();

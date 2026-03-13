@@ -580,7 +580,7 @@ void MidiClipView::paintEvent( QPaintEvent * )
 	}
 	else
 	{
-		c = getColorForDisplay( painter.background().color() );
+		c = getColorForDisplay( clipBgColor() );
 	}
 
 	// invert the gradient for the background in the B&B editor

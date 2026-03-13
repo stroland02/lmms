@@ -134,8 +134,8 @@ void TimeLineWidget::paintEvent( QPaintEvent * )
 {
 	QPainter p( this );
 
-	// Draw background
-	p.fillRect( 0, 0, width(), height(), p.background() );
+	// Draw background using the QSS-driven bgColor property
+	p.fillRect( 0, 0, width(), height(), m_bgColor );
 
 	// Clip so that we only draw everything starting from the offset
 	p.setClipRect(m_xOffset, 0, width() - m_xOffset, height());

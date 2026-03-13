@@ -243,7 +243,7 @@ void AutomationClipView::paintEvent( QPaintEvent * )
 	QPainter p( &m_paintPixmap );
 
 	QLinearGradient lingrad( 0, 0, 0, height() );
-	QColor c = getColorForDisplay( painter.background().color() );
+	QColor c = getColorForDisplay( clipBgColor() );
 	bool muted = m_clip->getTrack()->isMuted() || m_clip->isMuted();
 	bool current = getGUI()->automationEditor()->currentClip() == m_clip;
 
