@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project creator="LMMS" version="23" creatorversion="1.3.0-alpha.1.365+pr6610.gec9ef1326" type="instrumenttracksettings">
+  <head/>
+  <instrumenttracksettings mutedBeforeSolo="0" name="Tanaka Lofi Keyz [Mastartiq]" solo="0" type="0" muted="0">
+    <instrumenttrack pitch="0" range_import="1" pan="0" lastkey="127" firstkey="0" enablecc="0" keymap="0" vol="84" basenote="69" enabled="0" pitchrange="1" scale="0" usemasterpitch="1" mixch="0">
+      <midicontrollers cc112="0" cc110="0" cc117="0" cc44="0" cc16="0" cc46="0" cc114="0" cc98="0" cc48="0" cc73="0" cc31="0" cc108="0" cc126="0" cc76="0" cc20="0" cc27="0" cc70="0" cc92="0" cc125="0" cc6="0" cc118="0" cc122="0" cc61="0" cc7="0" cc103="0" cc119="0" cc56="0" cc50="0" cc94="0" cc14="0" cc100="0" cc113="0" cc43="0" cc23="0" cc49="0" cc52="0" cc80="0" cc72="0" cc75="0" cc45="0" cc19="0" cc107="0" cc63="0" cc55="0" cc26="0" cc5="0" cc29="0" cc53="0" cc4="0" cc0="0" cc105="0" cc39="0" cc106="0" cc25="0" cc97="0" cc60="0" cc93="0" cc30="0" cc82="0" cc121="0" cc34="0" cc36="0" cc68="0" cc9="0" cc42="0" cc101="0" cc32="0" cc83="0" cc115="0" cc11="0" cc81="0" cc84="0" cc111="0" cc21="0" cc96="0" cc18="0" cc41="0" cc89="0" cc64="0" cc17="0" cc15="0" cc86="0" cc66="0" cc99="0" cc104="0" cc120="0" cc57="0" cc51="0" cc37="0" cc67="0" cc47="0" cc74="0" cc38="0" cc10="0" cc35="0" cc87="0" cc22="0" cc71="0" cc95="0" cc85="0" cc88="0" cc62="0" cc116="0" cc12="0" cc2="0" cc69="0" cc90="0" cc102="0" cc33="0" cc3="0" cc65="0" cc40="0" cc54="0" cc123="0" cc13="0" cc109="0" cc124="0" cc91="0" cc24="0" cc8="0" cc78="0" cc28="0" cc77="0" cc79="0" cc1="0" cc59="0" cc127="0" cc58="0"/>
+      <instrument name="vibedstrings">
+        <vibedstrings volume4="141" pick0="0" octave4="2" active5="0" active7="0" pan0="-0.27" length4="4" pan4="0.35" version="0.1" pickup0="0.025" active2="0" active6="0" impulse0="0" slap4="0.25" active1="0" impulse4="0" pick4="0.01" slap0="0.11" active4="1" detune4="0.03" graph4="AAAAAAAAAD0AAIA9AADAPQAAAD4AACA+AABAPgAAYD4AAIA+AACQPgAAoD4AALA+AADAPgAA0D4AAOA+AADwPgAAAD8AAAg/AAAQPwAAGD8AACA/AAAoPwAAMD8AADg/AABAPwAASD8AAFA/AABYPwAAYD8AAGg/AABwPwAAeD8AAIA/AAB4PwAAcD8AAGg/AABgPwAAWD8AAFA/AABIPwAAQD8AADg/AAAwPwAAKD8AACA/AAAYPwAAED8AAAg/AAAAPwAA8D4AAOA+AADQPgAAwD4AALA+AACgPgAAkD4AAIA+AABgPgAAQD4AACA+AAAAPgAAwD0AAIA9AAAAPQAAAAAAAAC9AACAvQAAwL0AAAC+AAAgvgAAQL4AAGC+AACAvgAAkL4AAKC+AACwvgAAwL4AANC+AADgvgAA8L4AAAC/AAAIvwAAEL8AABi/AAAgvwAAKL8AADC/AAA4vwAAQL8AAEi/AABQvwAAWL8AAGC/AABovwAAcL8AAHi/AACAvwAAeL8AAHC/AABovwAAYL8AAFi/AABQvwAASL8AAEC/AAA4vwAAML8AACi/AAAgvwAAGL8AABC/AAAIvwAAAL8AAPC+AADgvgAA0L4AAMC+AACwvgAAoL4AAJC+AACAvgAAYL4AAEC+AAAgvgAAAL4AAMC9AACAvQAAAL0=" octave0="2" length0="4" graph0="AAAAAAAAAD0AAIA9AADAPQAAAD4AACA+AABAPgAAYD4AAIA+AACQPgAAoD4AALA+AADAPgAA0D4AAOA+AADwPgAAAD8AAAg/AAAQPwAAGD8AACA/AAAoPwAAMD8AADg/AABAPwAASD8AAFA/AABYPwAAYD8AAGg/AABwPwAAeD8AAIA/AAB4PwAAcD8AAGg/AABgPwAAWD8AAFA/AABIPwAAQD8AADg/AAAwPwAAKD8AACA/AAAYPwAAED8AAAg/AAAAPwAA8D4AAOA+AADQPgAAwD4AALA+AACgPgAAkD4AAIA+AABgPgAAQD4AACA+AAAAPgAAwD0AAIA9AAAAPQAAAAAAAAC9AACAvQAAwL0AAAC+AAAgvgAAQL4AAGC+AACAvgAAkL4AAKC+AACwvgAAwL4AANC+AADgvgAA8L4AAAC/AAAIvwAAEL8AABi/AAAgvwAAKL8AADC/AAA4vwAAQL8AAEi/AABQvwAAWL8AAGC/AABovwAAcL8AAHi/AACAvwAAeL8AAHC/AABovwAAYL8AAFi/AABQvwAASL8AAEC/AAA4vwAAML8AACi/AAAgvwAAGL8AABC/AAAIvwAAAL8AAPC+AADgvgAA0L4AAMC+AACwvgAAoL4AAJC+AACAvgAAYL4AAEC+AAAgvgAAAL4AAMC9AACAvQAAAL0=" detune0="0.03" stiffness4="0.026" active3="0" pickup4="0.035" volume0="130" stiffness0="0.007" active0="1" active8="0">
+          <key/>
+        </vibedstrings>
+      </instrument>
+      <eldata fwet="0" ftype="0" fres="0.5" fcut="14000">
+        <elvol x100="0" userwavefile="" lspd_denominator="4" lpdel="0" hold="2" ctlenvamt="0" rel="0.396" sustain="0.5" pdel="0" latt="0" amt="0.99" dec="0.5" lamt="0" att="0.024" lspd="0.1" lspd_syncmode="0" lspd_numerator="4" lshp="0"/>
+        <elcut x100="0" userwavefile="" lspd_denominator="4" lpdel="0" hold="0.5" ctlenvamt="0" rel="0.1" sustain="0.5" pdel="0" latt="0" amt="0" dec="0.5" lamt="0" att="0" lspd="0.1" lspd_syncmode="0" lspd_numerator="4" lshp="0"/>
+        <elres x100="0" userwavefile="" lspd_denominator="4" lpdel="0" hold="0.5" ctlenvamt="0" rel="0.1" sustain="0.5" pdel="0" latt="0" amt="0" dec="0.5" lamt="0" att="0" lspd="0.1" lspd_syncmode="0" lspd_numerator="4" lshp="0"/>
+      </eldata>
+      <chordcreator chord-enabled="0" chordrange="1" chord="0"/>
+      <arpeggiator arprange="1" arp-enabled="0" arptime_denominator="4" arpgate="100" arptime="200" arpmiss="0" arptime_numerator="4" arp="0" arpcycle="0" arpmode="0" arpskip="0" arprepeats="1" arptime_syncmode="0" arpdir="0"/>
+      <fxchain numofeffects="4" enabled="1">
+        <effect wet="1" autoquit_syncmode="0" gate="0" name="ladspaeffect" on="1" autoquit_numerator="4" autoquit_denominator="4" autoquit="1">
+          <ladspacontrols ports="16">
+            <port04>
+              <data value="0.5752" scale_type="log" id="62928"/>
+            </port04>
+            <port05>
+              <data value="3.9412" scale_type="log" id="62935"/>
+            </port05>
+            <port06>
+              <data value="3.90495" scale_type="log" id="62942"/>
+            </port06>
+            <port07 data="43.2"/>
+            <port08 data="4"/>
+            <port09 data="90"/>
+            <port010 data="2.472"/>
+            <port011 data="1.272"/>
+            <port012>
+              <data value="3848.08" scale_type="log" id="62984"/>
+            </port012>
+            <port013>
+              <data value="1129.44" scale_type="log" id="62991"/>
+            </port013>
+            <port014>
+              <data value="3.212" scale_type="log" id="62998"/>
+            </port014>
+            <port015 data="0.63"/>
+            <port016 data="1"/>
+            <port017 data="1"/>
+            <port018 data="1"/>
+            <port027 data="1"/>
+          </ladspacontrols>
+          <key>
+            <attribute value="veal" name="file"/>
+            <attribute value="MultiChorus" name="plugin"/>
+          </key>
+        </effect>
+        <effect wet="1" autoquit_syncmode="0" gate="0" name="ladspaeffect" on="1" autoquit_numerator="4" autoquit_denominator="4" autoquit="1">
+          <ladspacontrols ports="8">
+            <port00 data="2940"/>
+            <port01 data="-4.48"/>
+            <port02 data="-20.48"/>
+            <port03 data="1"/>
+            <port04 data="1"/>
+            <port05 data="1"/>
+            <port06 data="0"/>
+            <port07 data="17"/>
+          </ladspacontrols>
+          <key>
+            <attribute value="tap_reverb" name="file"/>
+            <attribute value="tap_reverb" name="plugin"/>
+          </key>
+        </effect>
+        <effect wet="1" autoquit_syncmode="0" gate="0" name="ladspaeffect" on="1" autoquit_numerator="4" autoquit_denominator="4" autoquit="1">
+          <ladspacontrols link="1" ports="6">
+            <port01 link="1">
+              <data value="452.4" scale_type="log" id="65197"/>
+            </port01>
+            <port02 link="1" data="0.126748"/>
+            <port03 link="1" data="0.616"/>
+            <port11>
+              <data value="452.4" scale_type="log" id="65218"/>
+            </port11>
+            <port12 data="0.126748"/>
+            <port13 data="0.616"/>
+          </ladspacontrols>
+          <key>
+            <attribute value="caps" name="file"/>
+            <attribute value="AutoWah" name="plugin"/>
+          </key>
+        </effect>
+        <effect wet="1" autoquit_syncmode="0" gate="0" name="ladspaeffect" on="1" autoquit_numerator="4" autoquit_denominator="4" autoquit="1">
+          <ladspacontrols link="1" ports="2">
+            <port01 link="1" data="6.18408"/>
+            <port11 data="6.18408"/>
+          </ladspacontrols>
+          <key>
+            <attribute value="caps" name="file"/>
+            <attribute value="Clip" name="plugin"/>
+          </key>
+        </effect>
+      </fxchain>
+    </instrumenttrack>
+  </instrumenttracksettings>
+</lmms-project>

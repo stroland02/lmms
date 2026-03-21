@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project type="instrumenttracksettings" creator="LMMS" version="1.0" creatorversion="1.2.1">
+  <head/>
+  <instrumenttracksettings solo="0" type="0" muted="0" name="Awesome Synthwave Pad">
+    <instrumenttrack pan="0" pitchrange="1" usemasterpitch="1" basenote="69" pitch="0" vol="30" fxch="0">
+      <instrument name="monstro">
+        <monstro e1rel_denominator="4" f1l1="0" e2hol_denominator="4" l2phs="0" e1dec="0" o1ftr="0" v2l1="0" e1rel="0" p2e2="0" e1pre="0" e2rel_denominator="4" p1l2="0" e2att_syncmode="0" f3l2="0.01" v2e1="-0.002" s3e2="0" v3e1="0" v1l1="0" f3e1="0.01" o1vol="0" v1e1="0" e1pre_syncmode="0" e2sus="1" o2syn="0" o2vol="33" e2dec_denominator="4" o2ftr="2" w1l1="0" o3wav1="2" e1att="0" e2rel_syncmode="0" e1pre_denominator="4" e2att_numerator="4" p2l1="0" e2pre_denominator="4" f1e1="0" p1e1="0" l1wav="10" o1pw="50" e1dec_denominator="4" f2l2="0" p3e1="0" o2wav="2" f2e1="0" s3e1="0" l2att_syncmode="0" o1pan="0" l1att="0" w1l2="0" f1e2="0" v3l2="0" l1att_syncmode="0" o1spo="0" e1slo="0" l2att_numerator="4" l2att="0" f3e2="0" o2crs="0" e1hol_denominator="4" l2rat_numerator="4" e2hol_numerator="4" o3crs="0" f2e2="0" o1crs="0" s3l2="0" p3l1="0" f2l1="0.01" e1hol="0" e1dec_numerator="4" e2hol="0" e1pre_numerator="4" f1l2="0" o3sub="-70" o3syn="0" o1ssr="0" o2ftl="2" f3l1="0" e1rel_numerator="4" o2pan="0" e2dec="0" e2att="0" e1hol_numerator="4" o3wav2="9" e2hol_syncmode="0" e2pre_syncmode="0" v3l1="0" e2pre="0" o2synr="0" p3l2="0" o3spo="0" l1rat="181.818" e1rel_syncmode="0" l1rat_syncmode="5" o3synr="0" e1att_numerator="4" e1att_syncmode="0" l1att_numerator="4" v1l2="0" p2l2="0" v2l2="0" e2dec_numerator="4" w1e1="0" w1e2="0" l1rat_numerator="4" l2rat_syncmode="5" o2spo="0" o23mo="0" e1att_denominator="4" e1sus="1" v1e2="0" l2wav="10" e2rel_numerator="4" e2dec_syncmode="0" v2e2="0" l1rat_denominator="4" l2att_denominator="4" p3e2="0" l2rat_denominator="4" o1ftl="0" v3e2="0" e2slo="0" p1e2="0" l1att_denominator="4" p1l1="0" s3l1="0" e2pre_numerator="4" o3vol="33" o3pan="0" l1phs="0" e2att_denominator="4" l2rat="181.818" o1ssf="0" e1hol_syncmode="0" p2e1="0" e1dec_syncmode="0" e2rel="0"/>
+      </instrument>
+      <eldata fcut="1" ftype="6" fres="0.01" fwet="1">
+        <elvol lpdel="0" att="0.04" lshp="0" userwavefile="" amt="1" dec="0.297" lspd_numerator="4" x100="0" lspd="0.0917" lspd_denominator="4" hold="0" rel="1" lamt="0" lspd_syncmode="0" sustain="1" latt="0" ctlenvamt="0" pdel="0"/>
+        <elcut lpdel="0" att="0.2" lshp="5" userwavefile="" amt="0.7" dec="1.161" lspd_numerator="4" x100="0" lspd="0.0262" lspd_denominator="4" hold="0" rel="1" lamt="0" lspd_syncmode="0" sustain="0.5" latt="0" ctlenvamt="0" pdel="0"/>
+        <elres lpdel="0" att="0" lshp="1" userwavefile="" amt="0" dec="0.5" lspd_numerator="4" x100="0" lspd="0.01" lspd_denominator="4" hold="0" rel="0" lamt="0" lspd_syncmode="0" sustain="0.5" latt="0" ctlenvamt="0" pdel="0"/>
+      </eldata>
+      <chordcreator chord="0" chord-enabled="1" chordrange="1"/>
+      <arpeggiator arpmiss="0" arprange="3" arptime_numerator="4" arptime_denominator="4" arpmode="0" arptime="100" arpskip="0" arpcycle="0" arpgate="100" arp="8" arpdir="0" arptime_syncmode="0" arp-enabled="0"/>
+      <midiport inputchannel="0" fixedoutputvelocity="-1" readable="0" inputcontroller="0" outputcontroller="0" basevelocity="63" outputchannel="1" fixedinputvelocity="-1" outputprogram="1" writable="0" fixedoutputnote="-1"/>
+      <fxchain enabled="1" numofeffects="2">
+        <effect autoquit_syncmode="0" name="ladspaeffect" autoquit="1" on="1" autoquit_numerator="4" wet="1" autoquit_denominator="4" gate="0">
+          <ladspacontrols ports="7">
+            <port00 data="1.25"/>
+            <port01 data="90"/>
+            <port02 data="75"/>
+            <port03 data="25"/>
+            <port04 data="100"/>
+            <port05 data="0"/>
+            <port06 data="0"/>
+          </ladspacontrols>
+          <key>
+            <attribute value="tap_chorusflanger" name="file"/>
+            <attribute value="tap_chorusflanger" name="plugin"/>
+          </key>
+        </effect>
+        <effect autoquit_syncmode="0" name="reverbsc" autoquit="1" on="1" autoquit_numerator="4" wet="0.2" autoquit_denominator="4" gate="0">
+          <ReverbSCControls size="0.89" color="10000" input_gain="0" output_gain="0"/>
+          <key/>
+        </effect>
+      </fxchain>
+    </instrumenttrack>
+  </instrumenttracksettings>
+</lmms-project>

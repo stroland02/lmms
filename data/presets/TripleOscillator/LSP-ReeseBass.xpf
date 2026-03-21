@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project version="1.0" type="instrumenttracksettings" creatorversion="1.2.2" creator="LMMS">
+  <head/>
+  <instrumenttracksettings muted="0" type="0" name="Reese" solo="0">
+    <instrumenttrack pitch="0" vol="100" basenote="69" fxch="0" usemasterpitch="1" pitchrange="1" pan="0">
+      <instrument name="tripleoscillator">
+        <tripleoscillator stphdetun1="0" pan2="0" stphdetun2="0" finer1="35" coarse1="1" phoffset1="0" finel1="35" finel0="-35" vol0="75" vol2="106" vol1="75" coarse0="0" pan0="0" finel2="0" modalgo3="2" phoffset2="0" userwavefile1="" modalgo2="2" finer2="0" finer0="-35" userwavefile2="" stphdetun0="0" coarse2="-12" pan1="0" modalgo1="2" wavetype1="2" phoffset0="0" userwavefile0="" wavetype0="2" wavetype2="2"/>
+      </instrument>
+      <eldata ftype="0" fres="0.34" fcut="728" fwet="1">
+        <elvol amt="0.61" lamt="0" lspd_denominator="4" sustain="0.5" lspd_syncmode="0" lpdel="0" hold="0.5" att="0" dec="0.948" rel="0.32" lshp="0" userwavefile="" lspd_numerator="4" ctlenvamt="0" latt="0" pdel="0" lspd="0.1" x100="0"/>
+        <elcut amt="0" lamt="0" lspd_denominator="4" sustain="0.5" lspd_syncmode="0" lpdel="0" hold="0.5" att="0" dec="0.5" rel="0.1" lshp="0" userwavefile="" lspd_numerator="4" ctlenvamt="0" latt="0" pdel="0" lspd="0.1" x100="0"/>
+        <elres amt="0" lamt="0" lspd_denominator="4" sustain="0.5" lspd_syncmode="0" lpdel="0" hold="0.5" att="0" dec="0.5" rel="0.1" lshp="0" userwavefile="" lspd_numerator="4" ctlenvamt="0" latt="0" pdel="0" lspd="0.1" x100="0"/>
+      </eldata>
+      <chordcreator chordrange="1" chord-enabled="0" chord="0"/>
+      <arpeggiator arpskip="0" arpcycle="0" arptime="100" arpgate="100" arptime_syncmode="0" arptime_denominator="4" arpdir="0" arpmode="0" arp="0" arpmiss="0" arp-enabled="0" arprange="1" arptime_numerator="4"/>
+      <midiport outputprogram="1" outputcontroller="0" inputchannel="0" fixedoutputnote="-1" fixedoutputvelocity="-1" outputchannel="1" inputcontroller="0" writable="0" fixedinputvelocity="-1" basevelocity="63" readable="0"/>
+      <fxchain numofeffects="3" enabled="1">
+        <effect autoquit="1" autoquit_numerator="4" autoquit_syncmode="0" wet="1" autoquit_denominator="4" on="1" name="ladspaeffect" gate="0">
+          <ladspacontrols ports="13">
+            <port04 data="0"/>
+            <port05 data="1"/>
+            <port06 data="1"/>
+            <port07 data="1"/>
+            <port012 data="5.05"/>
+            <port013 data="10"/>
+            <port015>
+              <data id="14938" scale_type="log" value="20000"/>
+            </port015>
+            <port016>
+              <data id="19078" scale_type="log" value="10"/>
+            </port016>
+            <port017>
+              <data id="2714" scale_type="log" value="20000"/>
+            </port017>
+            <port018>
+              <data id="25927" scale_type="log" value="10"/>
+            </port018>
+            <port019>
+              <data id="8578" scale_type="log" value="2529.82"/>
+            </port019>
+            <port020 data="1"/>
+            <port021>
+              <data id="8183" scale_type="log" value="1"/>
+            </port021>
+          </ladspacontrols>
+          <key>
+            <attribute value="calf" name="file"/>
+            <attribute value="Saturator" name="plugin"/>
+          </key>
+        </effect>
+        <effect autoquit="1" autoquit_numerator="4" autoquit_syncmode="0" wet="1" autoquit_denominator="4" on="1" name="ladspaeffect" gate="0">
+          <ladspacontrols link="1" ports="4">
+            <port00 link="1">
+              <data id="27404" scale_type="log" value="243.047"/>
+            </port00>
+            <port01 data="1" link="1"/>
+            <port10>
+              <data id="18675" scale_type="log" value="243.047"/>
+            </port10>
+            <port11 data="1"/>
+          </ladspacontrols>
+          <key>
+            <attribute value="lowpass_iir_1891" name="file"/>
+            <attribute value="lowpass_iir" name="plugin"/>
+          </key>
+        </effect>
+        <effect autoquit="1" autoquit_numerator="4" autoquit_syncmode="0" wet="1" autoquit_denominator="4" on="1" name="bassbooster" gate="0">
+          <bassboostercontrols freq="100" ratio="2" gain="1"/>
+          <key/>
+        </effect>
+      </fxchain>
+    </instrumenttrack>
+  </instrumenttracksettings>
+</lmms-project>

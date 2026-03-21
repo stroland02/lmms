@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project type="instrumenttracksettings" version="1.0" creatorversion="1.2.2" creator="LMMS">
+  <head/>
+  <instrumenttracksettings type="0" name="Wonderful Synth Strings" muted="0" solo="0">
+    <instrumenttrack pan="0" fxch="0" pitchrange="1" vol="20" pitch="0" basenote="57" usemasterpitch="1">
+      <instrument name="monstro">
+        <monstro l2wav="0" e1pre_denominator="4" e2hol_syncmode="0" l2att="0" e2att_denominator="4" v3e1="0" v3e2="0" e2hol_numerator="4" p1e1="0" p1e2="0" l1rat_denominator="4" e2slo="0" l1wav="0" e1pre_syncmode="0" o2ftl="0" e2dec="0" l1att="0" o2ftr="0" o3pan="0" e2pre_numerator="4" e1dec_denominator="4" l1att_numerator="4" s3l1="0" e2pre_syncmode="0" o3spo="0" s3l2="0" v2l1="0" e1slo="0" v2l2="0" e1att_syncmode="0" o1ftl="0" e2rel_denominator="4" e1rel_syncmode="0" e1dec="0" e2sus="1" o1ftr="0" o2pan="0" f3l1="0" e1hol_denominator="4" f3l2="0" e2att_syncmode="0" o2spo="0" o3syn="0" e2rel_syncmode="0" o3vol="33" e1hol_numerator="4" e1sus="1" o1pan="0" e2hol="0" l2rat="1" s3e1="0" s3e2="0" e1pre_numerator="4" o2syn="0" o1spo="0" o2vol="33" v2e1="0" v2e2="0" w1l1="0" o2synr="0" w1l2="0" e1att_denominator="4" f3e1="0" f3e2="0" e1hol="0" l1rat="1" p3l1="0" p3l2="0" o1vol="1.6" o2wav="2" v1l1="0" v1l2="0" l2att_denominator="4" o3wav1="2" o3wav2="9" f2l1="0" f2l2="0" e1rel_denominator="4" e2rel="0" w1e1="0" w1e2="0" l1rat_syncmode="0" e2att_numerator="4" p3e1="0" e2pre="0" p3e2="0" o23mo="0" l2rat_numerator="4" e1rel="0" v1e1="0" o3crs="-12" v1e2="0" l2rat_syncmode="0" e1dec_syncmode="0" f2e1="0" e1pre="0" f2e2="0" e2dec_numerator="4" o1ssf="0" p2l1="0" p2l2="0" o2crs="0" l2phs="0" e2dec_syncmode="0" o1ssr="0" e2pre_denominator="4" o3sub="-92" e1att_numerator="4" f1l1="0" f1l2="0" o1crs="0" l1rat_numerator="4" l1phs="0" l1att_denominator="4" o1pw="50" e2att="0" e2rel_numerator="4" l2rat_denominator="4" o3synr="0" p2e1="0" p2e2="0" e1dec_numerator="4" e2dec_denominator="4" e1att="0" f1e1="0" f1e2="0" l1att_syncmode="0" v3l1="0" e2hol_denominator="4" v3l2="0" p1l1="0" p1l2="0" e1rel_numerator="4" l2att_numerator="4" l2att_syncmode="0" e1hol_syncmode="0"/>
+      </instrument>
+      <eldata fwet="0" fres="0.5" ftype="0" fcut="14000">
+        <elvol lpdel="0" sustain="1" lspd_denominator="4" lspd_numerator="4" lshp="1" rel="0.1" x100="0" userwavefile="" dec="0" att="0.30000001" ctlenvamt="0" lspd="0.09375" amt="1" pdel="0" hold="0" latt="0" lspd_syncmode="3" lamt="0"/>
+        <elcut lpdel="0" sustain="0.5" lspd_denominator="4" lspd_numerator="4" lshp="0" rel="0.1" x100="0" userwavefile="" dec="0.5" att="0" ctlenvamt="0" lspd="0.1" amt="0" pdel="0" hold="0.5" latt="0" lspd_syncmode="0" lamt="0"/>
+        <elres lpdel="0" sustain="0.5" lspd_denominator="4" lspd_numerator="4" lshp="0" rel="0.1" x100="0" userwavefile="" dec="0.5" att="0" ctlenvamt="0" lspd="0.1" amt="0" pdel="0" hold="0.5" latt="0" lspd_syncmode="0" lamt="0"/>
+      </eldata>
+      <chordcreator chordrange="1" chord-enabled="0" chord="0"/>
+      <arpeggiator arptime_numerator="4" arpmiss="0" arpmode="0" arpskip="0" arptime="200" arp="0" arpgate="100" arptime_syncmode="0" arpcycle="0" arp-enabled="0" arpdir="0" arptime_denominator="4" arprange="1"/>
+      <midiport fixedoutputvelocity="-1" outputchannel="1" outputprogram="1" basevelocity="63" fixedinputvelocity="-1" fixedoutputnote="-1" readable="1" inports="32:0 Oxygen Pro Mini:Oxygen Pro Mini USB MIDI" writable="0" outputcontroller="0" inputchannel="0" inputcontroller="0"/>
+      <fxchain numofeffects="2" enabled="1">
+        <effect on="1" autoquit_denominator="4" wet="1" gate="0" name="reverbsc" autoquit="1" autoquit_syncmode="0" autoquit_numerator="4">
+          <ReverbSCControls input_gain="0" color="10000" size="0.88999999" output_gain="0"/>
+          <key/>
+        </effect>
+        <effect on="1" autoquit_denominator="4" wet="1" gate="0" name="eq" autoquit="1" autoquit_syncmode="0" autoquit_numerator="4">
+          <Eq LP24="0" LP12="1" HP48="0" LPactive="1" HP="0" HighShelfgain="0" AnalyseIn="1" Peak4active="0" Peak3active="0" HP24="0" Peak2active="1" Peak1active="1" HighShelfres="1.4" Peak4bw="0.30000001" Peak3bw="0.30000001" Highshelfactive="0" HP12="1" HPactive="1" Peak2bw="0.1" Peak1bw="0.25" HPres="0.037999991" LP="0" Lowshelfgain="0" LPres="0.003" AnalyseOut="1" Outputgain="0" Lowshelfactive="0" LP48="0" Peak2gain="-9.7200003" LowShelfres="1.4" Peak3gain="0" Peak4gain="0">
+            <Inputgain scale_type="log" value="0" id="5988885"/>
+            <Peak1gain scale_type="log" value="-10.440001" id="3027752"/>
+            <HPfreq scale_type="log" value="20.000002" id="2528241"/>
+            <LowShelffreq scale_type="log" value="80" id="7345182"/>
+            <Peak1freq scale_type="log" value="629.76892" id="5264917"/>
+            <Peak2freq scale_type="log" value="314.73138" id="6774240"/>
+            <Peak3freq scale_type="log" value="1999.9996" id="216024"/>
+            <Peak4freq scale_type="log" value="4000.0007" id="551218"/>
+            <Highshelffreq scale_type="log" value="11999.999" id="7243398"/>
+            <LPfreq scale_type="log" value="20000" id="1224360"/>
+          </Eq>
+          <key/>
+        </effect>
+      </fxchain>
+    </instrumenttrack>
+  </instrumenttracksettings>
+</lmms-project>

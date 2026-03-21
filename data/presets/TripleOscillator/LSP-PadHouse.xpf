@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project version="20" creator="LMMS" type="instrumenttracksettings" creatorversion="1.3.0-alpha.1.102+g89fc6c960">
+  <head/>
+  <instrumenttracksettings type="0" name="Sf2 Player" mutedBeforeSolo="0" muted="0" solo="0">
+    <instrumenttrack lastkey="127" basenote="69" pan="0" enablecc="0" fxch="0" firstkey="0" usemasterpitch="1" vol="100" pitchrange="1" pitch="0">
+      <midicontrollers cc75="0" cc76="0" cc86="0" cc78="0" cc114="0" cc28="0" cc42="0" cc45="0" cc31="0" cc27="0" cc66="0" cc60="0" cc62="0" cc90="0" cc23="0" cc68="0" cc71="0" cc37="0" cc2="0" cc46="0" cc33="0" cc83="0" cc40="0" cc50="0" cc106="0" cc25="0" cc41="0" cc118="0" cc77="0" cc9="0" cc20="0" cc110="0" cc17="0" cc82="0" cc39="0" cc94="0" cc53="0" cc38="0" cc18="0" cc79="0" cc55="0" cc44="0" cc109="0" cc124="0" cc56="0" cc36="0" cc120="0" cc72="0" cc43="0" cc63="0" cc3="0" cc80="0" cc81="0" cc5="0" cc122="0" cc54="0" cc95="0" cc111="0" cc22="0" cc65="0" cc96="0" cc12="0" cc85="0" cc117="0" cc21="0" cc1="0" cc34="0" cc107="0" cc26="0" cc99="0" cc35="0" cc10="0" cc64="0" cc87="0" cc92="0" cc0="0" cc11="0" cc101="0" cc113="0" cc30="0" cc84="0" cc93="0" cc61="0" cc14="0" cc126="0" cc59="0" cc16="0" cc67="0" cc100="0" cc104="0" cc105="0" cc69="0" cc29="0" cc52="0" cc32="0" cc13="0" cc4="0" cc97="0" cc115="0" cc102="0" cc57="0" cc7="0" cc70="0" cc123="0" cc103="0" cc112="0" cc47="0" cc98="0" cc73="0" cc88="0" cc24="0" cc74="0" cc116="0" cc121="0" cc19="0" cc91="0" cc49="0" cc125="0" cc8="0" cc89="0" cc6="0" cc119="0" cc48="0" cc51="0" cc108="0" cc58="0" cc15="0" cc127="0"/>
+      <instrument name="sf2player">
+        <sf2player reverbLevel="0.9" reverbDamping="0" bank="0" reverbWidth="0.5" src="usersoundfont:titanic.sf2" patch="94" chorusOn="0" chorusNum="3" chorusSpeed="0.3" chorusLevel="2" chorusDepth="8" reverbRoomSize="0.2" gain="1" reverbOn="0">
+          <key/>
+        </sf2player>
+      </instrument>
+      <eldata fwet="0" fres="0.5" ftype="0" fcut="14000">
+        <elvol dec="0.5" x100="0" lpdel="0" lspd="0.1" att="0" lspd_numerator="4" rel="0.1" pdel="0" userwavefile="" latt="0" sustain="0.5" hold="0.5" lspd_denominator="4" amt="0" lspd_syncmode="0" ctlenvamt="0" lshp="0" lamt="0"/>
+        <elcut dec="0.5" x100="0" lpdel="0" lspd="0.1" att="0" lspd_numerator="4" rel="0.1" pdel="0" userwavefile="" latt="0" sustain="0.5" hold="0.5" lspd_denominator="4" amt="0" lspd_syncmode="0" ctlenvamt="0" lshp="0" lamt="0"/>
+        <elres dec="0.5" x100="0" lpdel="0" lspd="0.1" att="0" lspd_numerator="4" rel="0.1" pdel="0" userwavefile="" latt="0" sustain="0.5" hold="0.5" lspd_denominator="4" amt="0" lspd_syncmode="0" ctlenvamt="0" lshp="0" lamt="0"/>
+      </eldata>
+      <chordcreator chordrange="1" chord="0" chord-enabled="0"/>
+      <arpeggiator arptime="200" arprepeats="1" arpcycle="0" arpgate="100" arpmiss="0" arp-enabled="0" arprange="1" arp="0" arptime_numerator="4" arptime_denominator="4" arpmode="0" arpskip="0" arpdir="0" arptime_syncmode="0"/>
+      <fxchain numofeffects="2" enabled="1">
+        <effect on="1" autoquit_denominator="4" name="eq" gate="0" autoquit_numerator="4" autoquit_syncmode="0" autoquit="1" wet="1">
+          <Eq LowShelfres="1.4" LP12="1" Peak1bw="0.3" Peak4active="0" LPactive="1" HP24="0" Peak3active="0" Peak4gain="0" HP12="1" Lowshelfactive="1" Peak3bw="0.3" Peak2active="0" Highshelfactive="0" Peak2gain="0" Peak2bw="0.3" HPres="0.707" Peak1active="1" Peak4bw="0.3" LP24="0" LPres="0.707" AnalyseOut="1" AnalyseIn="1" HighShelfres="1.4" HP="0" HPactive="0" HP48="0" LP="0" Peak3gain="0" Outputgain="0" HighShelfgain="0" Lowshelfgain="9.36" LP48="0">
+            <Inputgain scale_type="log" id="1000" value="0"/>
+            <Peak1gain scale_type="log" id="29632" value="-14.04"/>
+            <HPfreq scale_type="log" id="9358" value="31"/>
+            <LowShelffreq scale_type="log" id="16675" value="81.2375"/>
+            <Peak1freq scale_type="log" id="22456" value="99.8117"/>
+            <Peak2freq scale_type="log" id="5936" value="250"/>
+            <Peak3freq scale_type="log" id="13981" value="2000"/>
+            <Peak4freq scale_type="log" id="18560" value="4000"/>
+            <Highshelffreq scale_type="log" id="25924" value="12000"/>
+            <LPfreq scale_type="log" id="28388" value="727.677"/>
+          </Eq>
+          <key/>
+        </effect>
+        <effect on="1" autoquit_denominator="4" name="vsteffect" gate="0" autoquit_numerator="4" autoquit_syncmode="0" autoquit="1" wet="1">
+          <vsteffectcontrols chunk="VkMyIQgFAAA8P3htbCB2ZXJzaW9uPSIxLjAiIGVuY29kaW5nPSJVVEYtOCI/PiA8dGFsIGN1cnByb2dyYW09IjAiIHZlcnNpb249IjEuMCI+PHByb2dyYW1zPjxwcm9ncmFtIHZlcnNpb249IjIuMCIgcHJvZ3JhbW5hbWU9IlNpZGVjaGFpbiIgc3BlZWRGYWN0b3I9IjAuNjY2NjY2Njg2NTM0ODgxNiIgZmlsdGVydHlwZT0iMC41NTU1NTU1ODIwNDY1MDg4IiB2b2x1bWVpbj0iMC41IiB2b2x1bWVvdXQ9IjAuNSIgZGVwdGg9IjEuMCIgcmVzb25hbmNlPSIwLjAiIG9mZnNldD0iMC41IiBsZWdhY3ltb2RlPSIwLjAiIGZpbHRlcnR5cGVOZXc9IjAuMjAwMDAwMDAyOTgwMjMyMiIgdHJpZ2dlcj0iMC4wIiBzdGVyZW9vZmZzZXQ9IjAuMCIgdGltZXNwZWNpYWw9IjAuMCIgbWlkaVRyaWdnZXI9IjAuMCIgbG9vcD0iMS4wIj48c3BsaW5lUG9pbnRzPjxzcGxpbmVQb2ludCBpc1N0YXJ0UG9pbnQ9IjEiIGlzRW5kUG9pbnQ9IjAiIGNlbnRlclBvaW50WD0iMC4wIiBjZW50ZXJQb2ludFk9IjAuMCIgY29udHJvbFBvaW50TGVmdFg9IjAuMCIgY29udHJvbFBvaW50TGVmdFk9IjAuMCIgY29udHJvbFBvaW50UmlnaHRYPSIwLjEwMDAwMDAwMTQ5MDExNjEiIGNvbnRyb2xQb2ludFJpZ2h0WT0iMC4wIi8+PHNwbGluZVBvaW50IGlzU3RhcnRQb2ludD0iMCIgaXNFbmRQb2ludD0iMCIgY2VudGVyUG9pbnRYPSIwLjUwMjU1NzUxNjA5ODAyMjUiIGNlbnRlclBvaW50WT0iMS4wIiBjb250cm9sUG9pbnRMZWZ0WD0iMC40MDI1NTc1MjIwNTg0ODY5IiBjb250cm9sUG9pbnRMZWZ0WT0iMS4wIiBjb250cm9sUG9pbnRSaWdodFg9IjAuNjAyNTU3NDIwNzMwNTkwOCIgY29udHJvbFBvaW50UmlnaHRZPSIxLjAiLz48c3BsaW5lUG9pbnQgaXNTdGFydFBvaW50PSIwIiBpc0VuZFBvaW50PSIwIiBjZW50ZXJQb2ludFg9IjAuOTgyMDk3MjA4NDk5OTA4NCIgY2VudGVyUG9pbnRZPSIxLjAiIGNvbnRyb2xQb2ludExlZnRYPSIwLjg4MjA5NzE4NDY1ODA1MDUiIGNvbnRyb2xQb2ludExlZnRZPSIxLjAiIGNvbnRyb2xQb2ludFJpZ2h0WD0iMS4wIiBjb250cm9sUG9pbnRSaWdodFk9IjEuMCIvPjxzcGxpbmVQb2ludCBpc1N0YXJ0UG9pbnQ9IjAiIGlzRW5kUG9pbnQ9IjEiIGNlbnRlclBvaW50WD0iMS4wIiBjZW50ZXJQb2ludFk9IjAuMCIgY29udHJvbFBvaW50TGVmdFg9IjAuODk5OTk5OTc2MTU4MTQyMSIgY29udHJvbFBvaW50TGVmdFk9IjAuMCIgY29udHJvbFBvaW50UmlnaHRYPSIxLjAiIGNvbnRyb2xQb2ludFJpZ2h0WT0iMC4wIi8+PC9zcGxpbmVQb2ludHM+PC9wcm9ncmFtPjwvcHJvZ3JhbXM+PC90YWw+AA==" program="0" plugin="install_TAL-Filter-2\TAL-Filter-2-64.dll" guivisible="0"/>
+          <key>
+            <attribute name="file" value="install_TAL-Filter-2\TAL-Filter-2-64.dll"/>
+          </key>
+        </effect>
+      </fxchain>
+    </instrumenttrack>
+  </instrumenttracksettings>
+</lmms-project>

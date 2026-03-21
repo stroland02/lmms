@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project type="instrumenttracksettings" creator="LMMS" version="1.0" creatorversion="1.2.0-rc8">
+  <head/>
+  <instrumenttracksettings muted="0" solo="0" type="0" name="Electronic Kalimba">
+    <instrumenttrack pitchrange="1" basenote="45" fxch="0" pitch="0" usemasterpitch="1" vol="100" pan="0">
+      <instrument name="OPL2">
+        <OPL2 op1_d="8" op2_r="11" op1_waveform="0" op2_perc="0" op2_ksr="0" op2_lvl="63" op1_scale="0" op1_a="0" vib_depth="1" feedback="7" op2_d="12" op2_vib="1" op2_a="0" op1_trem="0" op1_perc="1" op1_r="4" op2_mul="0" op2_s="0" op2_scale="0" trem_depth="1" op1_vib="1" op1_ksr="1" op1_mul="2" fm="1" op2_trem="0" op1_lvl="30" op2_waveform="0" op1_s="1"/>
+      </instrument>
+      <eldata fwet="0" ftype="0" fcut="14000" fres="0.5">
+        <elvol lshp="0" pdel="0" sustain="0.5" rel="0.1" userwavefile="" att="0" lspd_denominator="4" lspd_syncmode="0" hold="0.5" lamt="0" lpdel="0" latt="0" lspd_numerator="4" lspd="0.1" x100="0" dec="0.5" amt="0" ctlenvamt="0"/>
+        <elcut lshp="0" pdel="0" sustain="0.5" rel="0.1" userwavefile="" att="0" lspd_denominator="4" lspd_syncmode="0" hold="0.5" lamt="0" lpdel="0" latt="0" lspd_numerator="4" lspd="0.1" x100="0" dec="0.5" amt="0" ctlenvamt="0"/>
+        <elres lshp="0" pdel="0" sustain="0.5" rel="0.1" userwavefile="" att="0" lspd_denominator="4" lspd_syncmode="0" hold="0.5" lamt="0" lpdel="0" latt="0" lspd_numerator="4" lspd="0.1" x100="0" dec="0.5" amt="0" ctlenvamt="0"/>
+      </eldata>
+      <chordcreator chord-enabled="0" chord="0" chordrange="1"/>
+      <arpeggiator arpgate="100" arptime_syncmode="0" arptime="200" arp-enabled="0" arprange="1" arptime_denominator="4" arpcycle="0" arpdir="0" arptime_numerator="4" arpskip="0" arp="0" arpmiss="0" arpmode="0"/>
+      <midiport fixedoutputvelocity="-1" inputchannel="0" writable="0" outputcontroller="0" fixedoutputnote="-1" readable="0" basevelocity="63" inputcontroller="0" outputchannel="1" outputprogram="1" fixedinputvelocity="-1"/>
+      <fxchain enabled="1" numofeffects="2">
+        <effect wet="1" gate="0" autoquit_denominator="4" autoquit="1" autoquit_syncmode="0" on="1" autoquit_numerator="4" name="eq">
+          <Eq LPres="0.707" Peak4active="0" Peak2gain="0" LP24="0" Peak1active="0" Peak3active="1" LP="0" LP48="0" AnalyseIn="1" HP48="0" HPres="0.707" HighShelfgain="0" Peak1bw="0.3" LPactive="0" HP24="0" LowShelfres="1.4" Outputgain="0" Lowshelfactive="0" Lowshelfgain="0" Peak4gain="0" Peak3bw="0.998" Peak2active="0" HPactive="0" Peak2bw="0.3" AnalyseOut="1" HP12="1" HP="0" LP12="1" HighShelfres="1.4" Peak4bw="0.3" Peak3gain="4.14" Highshelfactive="0">
+            <Inputgain id="22885" value="0" scale_type="log"/>
+            <Peak1gain id="3397" value="0" scale_type="log"/>
+            <HPfreq id="32346" value="31" scale_type="log"/>
+            <LowShelffreq id="9241" value="80" scale_type="log"/>
+            <Peak1freq id="21194" value="120" scale_type="log"/>
+            <Peak2freq id="23323" value="250" scale_type="log"/>
+            <Peak3freq id="26738" value="2000" scale_type="log"/>
+            <Peak4freq id="25414" value="4000" scale_type="log"/>
+            <Highshelffreq id="2362" value="12000" scale_type="log"/>
+            <LPfreq id="5929" value="18000" scale_type="log"/>
+          </Eq>
+          <key/>
+        </effect>
+        <effect wet="1" gate="0" autoquit_denominator="4" autoquit="1" autoquit_syncmode="0" on="1" autoquit_numerator="4" name="ladspaeffect">
+          <ladspacontrols ports="9">
+            <port07>
+              <data id="15503" value="1.0147" scale_type="log"/>
+            </port07>
+            <port08>
+              <data id="18776" value="10674" scale_type="log"/>
+            </port08>
+            <port09 data="2"/>
+            <port010 data="0.5"/>
+            <port011 data="0.3075"/>
+            <port012 data="1"/>
+            <port013 data="1"/>
+            <port014>
+              <data id="7921" value="432.068" scale_type="log"/>
+            </port014>
+            <port015>
+              <data id="14166" value="9965.02" scale_type="log"/>
+            </port015>
+          </ladspacontrols>
+          <key>
+            <attribute name="file" value="calf"/>
+            <attribute name="plugin" value="Reverb"/>
+          </key>
+        </effect>
+      </fxchain>
+    </instrumenttrack>
+  </instrumenttracksettings>
+</lmms-project>
