@@ -85,7 +85,7 @@ TrackOperationsWidget::TrackOperationsWidget( TrackView * parent ) :
 	// buttons in a layout.
 	auto operationsWidget = new QWidget(this);
 	auto operationsLayout = new QHBoxLayout(operationsWidget);
-	operationsLayout->setContentsMargins(2, 6, 0, 6);
+	operationsLayout->setContentsMargins(2, 2, 0, 2);
 	operationsLayout->setSpacing(2);
 
 	m_trackOps = new QPushButton(operationsWidget);
@@ -107,7 +107,7 @@ TrackOperationsWidget::TrackOperationsWidget( TrackView * parent ) :
 	operationsLayout->addWidget(m_muteBtn);
 	operationsLayout->addWidget(m_soloBtn);
 
-	layout->addWidget(operationsWidget, 0, Qt::AlignTop | Qt::AlignLeading);
+	layout->addWidget(operationsWidget, 0, Qt::AlignVCenter | Qt::AlignLeading);
 
 	connect( this, SIGNAL(trackRemovalScheduled(lmms::gui::TrackView*)),
 			m_trackView->trackContainerView(),

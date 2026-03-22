@@ -28,37 +28,24 @@
 #include "Track.h"
 
 #include <QPainter>
-#include <QPixmap>
 #include <QMouseEvent>
 
 
 namespace lmms::gui
 {
 
-QPixmap* TrackGrip::s_grabbedPixmap = nullptr;
-QPixmap* TrackGrip::s_releasedPixmap = nullptr;
-
-constexpr int c_margin = 2;
+constexpr int c_gripWidth = 14;
+constexpr qreal c_dotRadius = 1.5;
+constexpr int c_dotSpacingY = 5;
+constexpr int c_dotSpacingX = 5;
 
 TrackGrip::TrackGrip(Track* track, QWidget* parent) :
 	QWidget(parent),
 	m_track(track)
 {
-	if (!s_grabbedPixmap)
-	{
-		s_grabbedPixmap = new QPixmap(embed::getIconPixmap("track_op_grip_c"));
-	}
-
-	if (!s_releasedPixmap)
-	{
-		s_releasedPixmap = new QPixmap(embed::getIconPixmap("track_op_grip"));
-	}
-
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-
 	setCursor(Qt::OpenHandCursor);
-
-	setFixedWidth(std::max(s_grabbedPixmap->width(), s_releasedPixmap->width()) + 2 * c_margin);
+	setFixedWidth(c_gripWidth);
 }
 
 void TrackGrip::mousePressEvent(QMouseEvent* m)
@@ -88,19 +75,51 @@ void TrackGrip::mouseReleaseEvent(QMouseEvent* m)
 void TrackGrip::paintEvent(QPaintEvent*)
 {
 	QPainter p(this);
+	p.setRenderHint(QPainter::Antialiasing, true);
 
-	// Check if the color of the track should be used for the background
-	const auto color = m_track->color();
+	// Determine background color
+	const auto trackColor = m_track->color();
 	const auto muted = m_track->getMutedModel()->value();
 
-	if (color.has_value() && !muted) 
+	QColor bg;
+	if (trackColor.has_value() && !muted)
 	{
-		p.fillRect(rect(), color.value());
+		bg = trackColor.value();
+		p.fillRect(rect(), bg);
+	}
+	else
+	{
+		// Use parent widget's palette background
+		bg = palette().color(QPalette::Window);
 	}
 
-	// Paint the pixmap
-	auto r = rect().marginsRemoved(QMargins(c_margin, c_margin, c_margin, c_margin));
-	p.drawTiledPixmap(r, m_isGrabbed ? *s_grabbedPixmap : *s_releasedPixmap);
+	// Check luminance to pick dot color: light bg → dark dots, dark bg → light dots
+	const qreal luminance = 0.299 * bg.redF() + 0.587 * bg.greenF() + 0.114 * bg.blueF();
+	const QColor dotColor = luminance > 0.5 ? QColor(0x88, 0x88, 0x88) : QColor(0xcc, 0xcc, 0xcc);
+
+	// Slightly dim dots when grabbed
+	QColor drawColor = dotColor;
+	if (m_isGrabbed)
+	{
+		drawColor.setAlphaF(0.6f);
+	}
+
+	p.setPen(Qt::NoPen);
+	p.setBrush(drawColor);
+
+	// Draw 2-column dot grid centered in the widget
+	const int cx = width() / 2;
+	const int col1 = cx - c_dotSpacingX / 2;
+	const int col2 = cx + c_dotSpacingX / 2;
+
+	const int startY = 6;
+	const int endY = height() - 4;
+
+	for (int y = startY; y < endY; y += c_dotSpacingY)
+	{
+		p.drawEllipse(QPointF(col1, y), c_dotRadius, c_dotRadius);
+		p.drawEllipse(QPointF(col2, y), c_dotRadius, c_dotRadius);
+	}
 }
 
 } // namespace lmms::gui

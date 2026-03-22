@@ -27,6 +27,8 @@
 
 #include <QFileInfo>
 #include <QPainter>
+#include <QPainterPath>
+#include <QLinearGradient>
 
 #include "Sample.h"
 
@@ -135,15 +137,23 @@ void SampleThumbnail::visualize(VisualizeParameters parameters, QPainter& painte
 	const auto finerThumbnailWidth = useOriginalBuffer ? m_buffer->size() : finerThumbnail->width();
 	const auto finerThumbnailScaleFactor = static_cast<double>(finerThumbnailWidth) / targetThumbnailWidth;
 	const auto yScale = renderRect.height() / 2 * parameters.amplification;
+	const auto centerY = static_cast<qreal>(renderRect.center().y());
+
+	// Collect peak data into paths
+	QPainterPath topPath;
+	QPainterPath bottomPath;
+	bool firstPoint = true;
 
 	for (auto x = renderRect.x(), i = thumbnailBegin; x < renderRect.x() + renderRect.width() && i != thumbnailEnd;
 		++x, i += advanceThumbnailBy)
 	{
+		qreal yMin, yMax;
+
 		if (useOriginalBuffer && drawOriginalBuffer)
 		{
 			const auto value = m_buffer->data()->data()[i];
-			painter.drawPoint(x, renderRect.center().y() - value * yScale);
-			continue;
+			yMin = centerY - value * yScale;
+			yMax = yMin;
 		}
 		else
 		{
@@ -169,11 +179,65 @@ void SampleThumbnail::visualize(VisualizeParameters parameters, QPainter& painte
 				maxPeak = peak.max;
 			}
 
-			const auto yMin = renderRect.center().y() - minPeak * yScale;
-			const auto yMax = renderRect.center().y() - maxPeak * yScale;
-			painter.drawLine(x, yMin, x, yMax);
+			yMin = centerY - minPeak * yScale;  // bottom of waveform (min peak → below center)
+			yMax = centerY - maxPeak * yScale;   // top of waveform (max peak → above center)
+		}
+
+		if (firstPoint)
+		{
+			topPath.moveTo(x, yMax);
+			bottomPath.moveTo(x, yMin);
+			firstPoint = false;
+		}
+		else
+		{
+			topPath.lineTo(x, yMax);
+			bottomPath.lineTo(x, yMin);
 		}
 	}
+
+	if (firstPoint) { painter.restore(); return; }
+
+	// Use a neutral dark color for the waveform (independent of clip bg color)
+	const QColor waveColor(0x2A, 0x2A, 0x2A);
+
+	// Draw center line
+	QColor centerLineColor = waveColor;
+	centerLineColor.setAlpha(50);
+	painter.setPen(QPen(centerLineColor, 0.5));
+	painter.drawLine(QPointF(renderRect.x(), centerY), QPointF(renderRect.x() + renderRect.width(), centerY));
+
+	// Build closed fill shape: top path forward + bottom path reversed
+	QPainterPath fillPath = topPath;
+	// Reverse bottomPath by extracting points
+	const int elemCount = bottomPath.elementCount();
+	for (int e = elemCount - 1; e >= 0; --e)
+	{
+		const auto elem = bottomPath.elementAt(e);
+		fillPath.lineTo(elem.x, elem.y);
+	}
+	fillPath.closeSubpath();
+
+	// Gradient fill: alpha 140 at peaks → alpha 60 at center
+	QLinearGradient grad(0, renderRect.y(), 0, renderRect.y() + renderRect.height());
+	QColor fillTop = waveColor; fillTop.setAlpha(140);
+	QColor fillMid = waveColor; fillMid.setAlpha(60);
+	QColor fillBot = waveColor; fillBot.setAlpha(140);
+	grad.setColorAt(0.0, fillTop);
+	grad.setColorAt(0.5, fillMid);
+	grad.setColorAt(1.0, fillBot);
+
+	painter.setPen(Qt::NoPen);
+	painter.setBrush(grad);
+	painter.drawPath(fillPath);
+
+	// Outline stroke on top and bottom envelopes
+	QColor outlineColor = waveColor;
+	outlineColor.setAlpha(180);
+	painter.setPen(QPen(outlineColor, 0.8));
+	painter.setBrush(Qt::NoBrush);
+	painter.drawPath(topPath);
+	painter.drawPath(bottomPath);
 
 	painter.restore();
 }
