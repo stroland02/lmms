@@ -76,7 +76,6 @@ TrackOperationsWidget::TrackOperationsWidget( TrackView * parent ) :
 	auto layout = new QHBoxLayout(this);
 	layout->setContentsMargins(0, 0, 0, 0);
 	layout->setSpacing(0);
-	layout->setAlignment(Qt::AlignTop);
 
 	m_trackGrip = new TrackGrip(m_trackView->getTrack(), this);
 	layout->addWidget(m_trackGrip);
@@ -85,7 +84,7 @@ TrackOperationsWidget::TrackOperationsWidget( TrackView * parent ) :
 	// buttons in a layout.
 	auto operationsWidget = new QWidget(this);
 	auto operationsLayout = new QHBoxLayout(operationsWidget);
-	operationsLayout->setContentsMargins(2, 2, 0, 2);
+	operationsLayout->setContentsMargins(2, 0, 0, 0);
 	operationsLayout->setSpacing(2);
 
 	m_trackOps = new QPushButton(operationsWidget);
@@ -93,15 +92,18 @@ TrackOperationsWidget::TrackOperationsWidget( TrackView * parent ) :
 	m_trackOps->setMenu( toMenu );
 	m_trackOps->setToolTip(tr("Actions"));
 	m_trackOps->setCursor(Qt::PointingHandCursor);
+	m_trackOps->setFixedSize(18, 18);
 
 	m_muteBtn = new AutomatableButton(operationsWidget, tr("Mute"));
 	m_muteBtn->setCheckable(true);
 	m_muteBtn->setToolTip(tr("Mute"));
 	m_muteBtn->setObjectName("btn-mute");
+	m_muteBtn->setFixedSize(18, 18);
 	m_soloBtn = new AutomatableButton(operationsWidget, tr("Solo"));
 	m_soloBtn->setCheckable(true);
 	m_soloBtn->setToolTip(tr("Solo"));
 	m_soloBtn->setObjectName("btn-solo");
+	m_soloBtn->setFixedSize(18, 18);
 
 	operationsLayout->addWidget(m_trackOps);
 	operationsLayout->addWidget(m_muteBtn);
