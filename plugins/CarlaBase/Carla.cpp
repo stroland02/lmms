@@ -157,12 +157,23 @@ CarlaInstrument::CarlaInstrument(InstrumentTrack* const instrumentTrack, const D
       fMidiEventCount(0),
       m_paramModels()
 {
+    if (fDescriptor == nullptr)
+    {
+        qWarning("CarlaInstrument: real Carla library not available (using dummy). "
+                 "VST3/LV2/CLAP hosting is disabled. Run scripts/setup_carla.bat to enable.");
+        // Still need a play-handle so LMMS doesn't crash
+        auto iph = new InstrumentPlayHandle(this, instrumentTrack);
+        Engine::audioEngine()->addPlayHandle(iph);
+        return;
+    }
+
     fHost.handle      = this;
     fHost.uiName      = nullptr;
     fHost.uiParentId  = 0;
 
     // carla/resources contains PyQt scripts required for launch
-    QDir path(carla_get_library_folder());
+    const char* libFolder = carla_get_library_folder();
+    QDir path(libFolder ? libFolder : ".");
 #if defined(CARLA_OS_LINUX)
     path.cdUp();
     path.cdUp();
@@ -380,6 +391,7 @@ void CarlaInstrument::saveSettings(QDomDocument& doc, QDomElement& parent)
 void CarlaInstrument::refreshParams(bool init)
 {
 	m_paramGroupCount = 0;
+	if (fDescriptor == nullptr || fHandle == nullptr) return;
 	if (fDescriptor->get_parameter_count != nullptr &&
 		fDescriptor->get_parameter_info  != nullptr &&
 		fDescriptor->get_parameter_value != nullptr &&
@@ -593,6 +605,8 @@ gui::PluginView* CarlaInstrument::instantiateView(QWidget* parent)
 
 void CarlaInstrument::sampleRateChanged()
 {
+    if (fDescriptor == nullptr || fHandle == nullptr)
+        return;
     fDescriptor->dispatcher(fHandle, NATIVE_PLUGIN_OPCODE_SAMPLE_RATE_CHANGED, 0, 0, nullptr, handleGetSampleRate());
 }
 
